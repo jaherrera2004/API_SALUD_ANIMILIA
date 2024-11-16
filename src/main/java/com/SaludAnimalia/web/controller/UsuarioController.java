@@ -26,4 +26,5 @@ public class UsuarioController {
         usuarioIService.registrarUsuario(request);
         return GenericResponse.ok(true, "Te has registrado exitosamente!");
     }
+
 }

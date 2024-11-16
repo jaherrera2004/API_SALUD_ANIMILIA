@@ -57,4 +57,12 @@ public class UsuarioServiceImpl implements UsuarioIService {
 
         return usuarioMapper.toDto(usuarioEntity);
     }
+
+    @Override
+    public UsuarioDto obtenerUsuarioPorId(Integer id) {
+        UsuarioEntity usuarioEntity = usuarioRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("Usuario no existente"));
+
+        return usuarioMapper.toDto(usuarioEntity);
+    }
 }

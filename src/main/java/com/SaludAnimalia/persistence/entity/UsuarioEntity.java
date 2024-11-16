@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -30,4 +32,7 @@ public class UsuarioEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_rol", nullable = false)
     private RolEntity rol;
+
+    @OneToMany(mappedBy = "duenio", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<MascotaEntity> mascotas;
 }

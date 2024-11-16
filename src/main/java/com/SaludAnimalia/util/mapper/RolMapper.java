@@ -9,5 +9,6 @@ import java.util.Optional;
 @Mapper(componentModel = "spring")
 public interface RolMapper {
     RolDto toDto(RolEntity entity);
+
     RolEntity toEntity(RolDto dto);
 }

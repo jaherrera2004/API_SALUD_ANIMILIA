@@ -8,4 +8,6 @@ public interface UsuarioIService {
     void registrarUsuario(UsuarioRequest request);
 
     UsuarioDto obtenerUsuarioPorUsername(String username);
+
+    UsuarioDto obtenerUsuarioPorId(Integer id);
 }
