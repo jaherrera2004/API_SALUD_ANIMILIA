@@ -14,7 +14,7 @@ public class AnimalEntity {
 
     @Id
     private Integer id;
-    private String nombre;
+    private String animal;
     private String descripcion;
 
     @OneToMany(mappedBy = "animal", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

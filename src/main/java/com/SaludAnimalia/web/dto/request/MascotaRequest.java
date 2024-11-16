@@ -21,11 +21,9 @@ public class MascotaRequest {
     private String raza;
 
     @NotNull
-    @NotEmpty
     private Integer edad;
 
     @NotNull
-    @NotEmpty
     private char sexo;
 
     @NotNull

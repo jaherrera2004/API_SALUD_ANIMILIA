@@ -1,5 +1,6 @@
 package com.SaludAnimalia.service.impl;
 
+import com.SaludAnimalia.persistence.entity.MascotaEntity;
 import com.SaludAnimalia.persistence.repository.AnimalRepository;
 import com.SaludAnimalia.persistence.repository.MascotaRepository;
 import com.SaludAnimalia.persistence.repository.UsuarioRepository;
@@ -36,7 +37,7 @@ public class MascotaServiceImpl implements MascotaIService {
             throw new HttpGenericException(HttpStatus.BAD_REQUEST,"Lo sentimos! El animal que has ingresado no lo tenemos registrad :(");
         }
 
-        if(usuarioRepository.existsById(request.getIdDuenio())){
+        if(!usuarioRepository.existsById(request.getIdDuenio())){
             throw new HttpGenericException(HttpStatus.BAD_REQUEST,"Lo sentimos!, No pudimos encontrar el dueño." );
         }
 
@@ -47,7 +48,8 @@ public class MascotaServiceImpl implements MascotaIService {
 
         mascotaDto.setAnimal(animalDto);
         mascotaDto.setDuenio(usuarioDto);
+        MascotaEntity entity = mascotaMapper.toEntity(mascotaDto);
 
-        mascotaRepository.save(mascotaMapper.toEntity(mascotaDto));
+        mascotaRepository.save(entity);
     }
 }

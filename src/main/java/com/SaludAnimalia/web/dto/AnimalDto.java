@@ -9,7 +9,7 @@ import lombok.Setter;
 @Builder
 public class AnimalDto {
     private Integer id;
-    private String nombre;
+    private String animal;
     private String descripcion;
 }
 

@@ -22,7 +22,6 @@ public class UsuarioController {
 
     @PostMapping
     public GenericResponse registrarUsuario(@RequestBody @Valid UsuarioRequest request){
-        System.out.println(rolIService.obtenerRolPorId(request.getIdRol()).getRol());
         usuarioIService.registrarUsuario(request);
         return GenericResponse.ok(true, "Te has registrado exitosamente!");
     }
