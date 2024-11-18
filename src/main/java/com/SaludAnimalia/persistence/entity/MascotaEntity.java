@@ -23,7 +23,7 @@ public class MascotaEntity {
     @JoinColumn(name = "id_animal", nullable = false)
     private AnimalEntity animal;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_duenio", nullable = false)
     private UsuarioEntity duenio;
 

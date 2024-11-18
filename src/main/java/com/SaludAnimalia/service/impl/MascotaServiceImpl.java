@@ -18,6 +18,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MascotaServiceImpl implements MascotaIService {
@@ -33,12 +35,12 @@ public class MascotaServiceImpl implements MascotaIService {
     @Override
     public void registrarMascota(MascotaRequest request) {
 
-        if(!animalRepository.existsById(request.getIdAnimal())){
-            throw new HttpGenericException(HttpStatus.BAD_REQUEST,"Lo sentimos! El animal que has ingresado no lo tenemos registrad :(");
+        if (!animalRepository.existsById(request.getIdAnimal())) {
+            throw new HttpGenericException(HttpStatus.BAD_REQUEST, "Lo sentimos! El animal que has ingresado no lo tenemos registrad :(");
         }
 
-        if(!usuarioRepository.existsById(request.getIdDuenio())){
-            throw new HttpGenericException(HttpStatus.BAD_REQUEST,"Lo sentimos!, No pudimos encontrar el dueño." );
+        if (!usuarioRepository.existsById(request.getIdDuenio())) {
+            throw new HttpGenericException(HttpStatus.BAD_REQUEST, "Lo sentimos!, No pudimos encontrar el dueño.");
         }
 
         AnimalDto animalDto = animalIService.obtenerAnimalPorId(request.getIdAnimal());
@@ -51,5 +53,18 @@ public class MascotaServiceImpl implements MascotaIService {
         MascotaEntity entity = mascotaMapper.toEntity(mascotaDto);
 
         mascotaRepository.save(entity);
+    }
+
+    @Override
+    public List<MascotaDto> obtenerMascotasPorUsuario(Integer idUsuario) {
+
+        if(!usuarioRepository.existsById(idUsuario)){
+            throw new HttpGenericException(HttpStatus.BAD_REQUEST,"El usuario que has ingresado no existe");
+        }
+
+        return mascotaRepository.findMascotaEntitiesByDuenio_Id(idUsuario)
+                .stream()
+                .map(mascotaMapper::toDto)
+                .toList();
     }
 }

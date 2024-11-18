@@ -53,7 +53,7 @@ public class UsuarioServiceImpl implements UsuarioIService {
     @Override
     public UsuarioDto obtenerUsuarioPorUsername(String username) {
         UsuarioEntity usuarioEntity = usuarioRepository.findByUsername(username)
-                .orElseThrow(()-> new IllegalArgumentException("Usuario no existente"));
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no existente"));
 
         return usuarioMapper.toDto(usuarioEntity);
     }
@@ -61,8 +61,11 @@ public class UsuarioServiceImpl implements UsuarioIService {
     @Override
     public UsuarioDto obtenerUsuarioPorId(Integer id) {
         UsuarioEntity usuarioEntity = usuarioRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("Usuario no existente"));
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no existente"));
 
-        return usuarioMapper.toDto(usuarioEntity);
+        UsuarioDto usuarioDto = usuarioMapper.toDto(usuarioEntity);
+        usuarioDto.setContrasenia(null);
+
+        return usuarioDto;
     }
 }

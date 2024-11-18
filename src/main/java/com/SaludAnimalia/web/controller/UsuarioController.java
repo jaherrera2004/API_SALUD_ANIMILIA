@@ -3,14 +3,14 @@ package com.SaludAnimalia.web.controller;
 import com.SaludAnimalia.service.interfaces.RolIService;
 import com.SaludAnimalia.service.interfaces.UsuarioIService;
 import com.SaludAnimalia.util.DatosGenerales;
+import com.SaludAnimalia.web.dto.UsuarioDto;
 import com.SaludAnimalia.web.dto.request.UsuarioRequest;
 import com.SaludAnimalia.web.dto.response.GenericResponse;
+import com.SaludAnimalia.web.dto.response.usuario.UsuarioDatosResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,6 +24,12 @@ public class UsuarioController {
     public GenericResponse registrarUsuario(@RequestBody @Valid UsuarioRequest request){
         usuarioIService.registrarUsuario(request);
         return GenericResponse.ok(true, "Te has registrado exitosamente!");
+    }
+
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('usuario:obtener-id')")
+    public UsuarioDto obtenerUsuarioPorId(@PathVariable Integer id){
+        return usuarioIService.obtenerUsuarioPorId(id);
     }
 
 }

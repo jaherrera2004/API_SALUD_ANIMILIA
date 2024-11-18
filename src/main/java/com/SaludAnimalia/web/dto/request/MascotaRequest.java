@@ -3,6 +3,7 @@ package com.SaludAnimalia.web.dto.request;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,7 @@ public class MascotaRequest {
     private String raza;
 
     @NotNull
+    @PositiveOrZero
     private Integer edad;
 
     @NotNull
