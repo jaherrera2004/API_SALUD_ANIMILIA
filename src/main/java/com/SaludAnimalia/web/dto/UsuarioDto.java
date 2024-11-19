@@ -2,10 +2,7 @@ package com.SaludAnimalia.web.dto;
 
 import lombok.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class UsuarioDto {
 
     private Integer id;

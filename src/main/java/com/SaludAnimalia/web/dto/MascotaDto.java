@@ -1,12 +1,10 @@
 package com.SaludAnimalia.web.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
-@Builder
+import lombok.Data;
+
+
+@Data
 public class MascotaDto {
 
     private Integer id;

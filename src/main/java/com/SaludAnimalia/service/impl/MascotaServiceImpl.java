@@ -58,13 +58,30 @@ public class MascotaServiceImpl implements MascotaIService {
     @Override
     public List<MascotaDto> obtenerMascotasPorUsuario(Integer idUsuario) {
 
-        if(!usuarioRepository.existsById(idUsuario)){
-            throw new HttpGenericException(HttpStatus.BAD_REQUEST,"El usuario que has ingresado no existe");
+        if (!usuarioRepository.existsById(idUsuario)) {
+            throw new HttpGenericException(HttpStatus.BAD_REQUEST, "El usuario que has ingresado no existe");
         }
 
         return mascotaRepository.findMascotaEntitiesByDuenio_Id(idUsuario)
                 .stream()
                 .map(mascotaMapper::toDto)
                 .toList();
+    }
+
+    @Override
+    public void eliminarMascota(Integer id) {
+        if (!mascotaRepository.existsById(id)) {
+            throw new HttpGenericException(HttpStatus.BAD_REQUEST, "La mascota que has ingresado no existe");
+        }
+        mascotaRepository.deleteById(id);
+    }
+
+    @Override
+    public MascotaDto obtenerMascotaPorId(Integer id) {
+
+        MascotaEntity mascotaEntity = mascotaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Mascota no existente"));
+
+        return mascotaMapper.toDto(mascotaEntity);
     }
 }

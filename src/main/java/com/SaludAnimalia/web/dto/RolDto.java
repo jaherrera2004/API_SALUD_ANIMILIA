@@ -1,10 +1,9 @@
 package com.SaludAnimalia.web.dto;
 
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
+import lombok.Data;
+
+@Data
 public class RolDto {
     private Integer id;
     private String rol;

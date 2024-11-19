@@ -13,6 +13,8 @@ import lombok.Setter;
 @Builder
 public class MascotaRequest {
 
+    private Integer id;
+
     @NotNull
     @NotEmpty
     private String nombre;

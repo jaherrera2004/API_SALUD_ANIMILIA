@@ -1,13 +1,10 @@
 package com.SaludAnimalia.web.dto;
 
-
 import lombok.Data;
 
-
 @Data
-public class AnimalDto {
+public class CitaEstadoDto {
     private Integer id;
-    private String animal;
+    private String estado;
     private String descripcion;
 }
-

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -26,5 +28,8 @@ public class MascotaEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_duenio", nullable = false)
     private UsuarioEntity duenio;
+
+    @OneToMany(mappedBy = "mascota", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<CitaEntity> citas;
 
 }

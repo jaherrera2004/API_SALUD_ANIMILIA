@@ -9,4 +9,6 @@ public interface MascotaIService {
 
     void registrarMascota(MascotaRequest request);
     List<MascotaDto> obtenerMascotasPorUsuario(Integer idUsuario);
+    void eliminarMascota(Integer id);
+    MascotaDto obtenerMascotaPorId(Integer id);
 }

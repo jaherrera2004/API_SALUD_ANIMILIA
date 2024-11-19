@@ -35,4 +35,7 @@ public class UsuarioEntity {
 
     @OneToMany(mappedBy = "duenio", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<MascotaEntity> mascotas;
+
+    @OneToMany(mappedBy = "veterinario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<TurnoEntity> turnos;
 }
