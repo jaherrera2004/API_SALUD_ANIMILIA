@@ -11,7 +11,7 @@ import com.SaludAnimalia.web.dto.CustomUserDetails;
 import com.SaludAnimalia.web.dto.UsuarioDto;
 import com.SaludAnimalia.web.dto.request.AuthRequest;
 import com.SaludAnimalia.web.dto.response.AuthResponse;
-import com.SaludAnimalia.web.dto.response.usuario.UsuarioDatosResponse;
+import com.SaludAnimalia.web.dto.response.UsuarioDatosResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;

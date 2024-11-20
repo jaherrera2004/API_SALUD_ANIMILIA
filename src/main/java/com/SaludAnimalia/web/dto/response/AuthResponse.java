@@ -1,6 +1,5 @@
 package com.SaludAnimalia.web.dto.response;
 
-import com.SaludAnimalia.web.dto.response.usuario.UsuarioDatosResponse;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

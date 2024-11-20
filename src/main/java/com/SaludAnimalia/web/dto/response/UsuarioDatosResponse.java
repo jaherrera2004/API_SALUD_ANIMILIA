@@ -1,4 +1,4 @@
-package com.SaludAnimalia.web.dto.response.usuario;
+package com.SaludAnimalia.web.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;

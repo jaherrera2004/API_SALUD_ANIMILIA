@@ -3,10 +3,14 @@ package com.SaludAnimalia.service.impl;
 import com.SaludAnimalia.persistence.repository.CitaRepository;
 import com.SaludAnimalia.service.interfaces.*;
 import com.SaludAnimalia.util.mapper.CitaMapper;
+import com.SaludAnimalia.web.advice.exception.HttpGenericException;
 import com.SaludAnimalia.web.dto.*;
 import com.SaludAnimalia.web.dto.request.CitaRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -38,5 +42,20 @@ public class CitaServiceImpl implements CitaIService {
         turnoIService.actualizarTurno(request.getIdTurno(),0);
     }
 
+    @Override
+    public List<CitaDto> obtenerCitasPorUsuario(Integer idUsuario) {
+        return citaRepository.findCitaEntitiesByMascota_Duenio_Id(idUsuario)
+                .stream()
+                .map(citaMapper::toDto)
+                .toList();
+    }
 
+    @Override
+    public void actualizarEstadoCita(Integer idCita, Integer idEstado) {
+        if(!citaRepository.existsById(idCita)){
+            throw new HttpGenericException(HttpStatus.BAD_REQUEST,"Cita inexistente");
+        }
+        citaRepository.actualizarEstadoCita(idCita,idEstado);
+
+    }
 }

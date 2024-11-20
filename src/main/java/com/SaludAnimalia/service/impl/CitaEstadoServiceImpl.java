@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class CitaEstadoImpl implements CitaEstadoIService {
+public class CitaEstadoServiceImpl implements CitaEstadoIService {
 
     private final CitaEstadoRepsitory citaEstadoRepsitory;
     private final CitaEstadoMapper citaEstadoMapper;

@@ -6,7 +6,6 @@ import com.SaludAnimalia.util.DatosGenerales;
 import com.SaludAnimalia.web.dto.UsuarioDto;
 import com.SaludAnimalia.web.dto.request.UsuarioRequest;
 import com.SaludAnimalia.web.dto.response.GenericResponse;
-import com.SaludAnimalia.web.dto.response.usuario.UsuarioDatosResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
