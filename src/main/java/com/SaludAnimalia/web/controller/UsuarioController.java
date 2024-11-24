@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 public class UsuarioController {
 
     private final UsuarioIService usuarioIService;
-    private final RolIService rolIService;
 
     @PostMapping
     public GenericResponse registrarUsuario(@RequestBody @Valid UsuarioRequest request){

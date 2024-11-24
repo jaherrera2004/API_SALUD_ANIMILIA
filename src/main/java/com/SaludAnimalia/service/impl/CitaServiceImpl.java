@@ -78,6 +78,7 @@ public class CitaServiceImpl implements CitaIService {
 
         UsuarioDto usuarioDto = usuarioIService.obtenerUsuarioPorIdCita(idCita);
         citaRepository.actualizarEstadoCita(idCita, idEstado);
+        CitaDto citaDto = citaMapper.toDto(citaRepository.findById(idCita).get());
 
         if(idEstado == 2) { //Cita cancelada
             emailSenderService.sendEmail(usuarioDto, TIPOS_CORREOS.CANCELACION);

@@ -23,8 +23,4 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Integer>
 
     UsuarioEntity findUsuarioByIdCita(@Param("idCita") Integer idCita);
 
-    @Query(value="SELECT u.* FROM usuarios u \n " +
-            "JOIN mascotas m ON u.id=m.id_duenio\n AND m.id= :idMascota "
-            ,nativeQuery = true)
-    UsuarioEntity findUsuarioEntityByMascota(@Param("idMascota") Integer idMascota);
 }
