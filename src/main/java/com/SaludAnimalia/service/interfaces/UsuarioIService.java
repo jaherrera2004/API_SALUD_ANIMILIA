@@ -13,5 +13,5 @@ public interface UsuarioIService {
 
     UsuarioDto obtenerUsuarioPorIdCita(Integer idCita);
 
-    UsuarioDto obtenerUsuarioPorIdMascota(Integer idMascota);
+
 }

@@ -77,8 +77,5 @@ public class UsuarioServiceImpl implements UsuarioIService {
         return usuarioMapper.toDto(usuarioRepository.findUsuarioByIdCita(idCita));
     }
 
-    @Override
-    public UsuarioDto obtenerUsuarioPorIdMascota(Integer idMascota) {
-        return usuarioMapper.toDto(usuarioRepository.findUsuarioEntityByMascota(idMascota));
-    }
+
 }
