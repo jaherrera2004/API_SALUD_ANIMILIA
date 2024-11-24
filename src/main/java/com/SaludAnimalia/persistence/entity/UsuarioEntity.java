@@ -26,6 +26,8 @@ public class UsuarioEntity {
     private Integer edad;
     private String telefono;
     private String email;
+
+
     private String username;
     private String contrasenia;
 

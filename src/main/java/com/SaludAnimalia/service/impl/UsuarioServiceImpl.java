@@ -5,6 +5,7 @@ import com.SaludAnimalia.persistence.repository.UsuarioRepository;
 import com.SaludAnimalia.service.interfaces.AuthIService;
 import com.SaludAnimalia.service.interfaces.RolIService;
 import com.SaludAnimalia.service.interfaces.UsuarioIService;
+import com.SaludAnimalia.service.strategy.TIPOS_CORREOS;
 import com.SaludAnimalia.util.mapper.UsuarioMapper;
 import com.SaludAnimalia.web.advice.exception.HttpGenericException;
 import com.SaludAnimalia.web.dto.UsuarioDto;
@@ -23,6 +24,7 @@ public class UsuarioServiceImpl implements UsuarioIService {
     private final UsuarioMapper usuarioMapper;
     private final RolIService rolIService;
     private final PasswordEncoder passwordEncoder;
+    private final EmailSenderService emailSenderService;
 
     @Override
     public void registrarUsuario(UsuarioRequest request) {
@@ -48,6 +50,7 @@ public class UsuarioServiceImpl implements UsuarioIService {
         usuarioDto.setRol(rolIService.obtenerRolPorId(request.getIdRol()));
 
         usuarioRepository.save(usuarioMapper.toEntity(usuarioDto));
+        emailSenderService.sendEmail(usuarioDto, TIPOS_CORREOS.REGISTRO);
     }
 
     @Override
@@ -67,5 +70,15 @@ public class UsuarioServiceImpl implements UsuarioIService {
         usuarioDto.setContrasenia(null);
 
         return usuarioDto;
+    }
+
+    @Override
+    public UsuarioDto obtenerUsuarioPorIdCita(Integer idCita) {
+        return usuarioMapper.toDto(usuarioRepository.findUsuarioByIdCita(idCita));
+    }
+
+    @Override
+    public UsuarioDto obtenerUsuarioPorIdMascota(Integer idMascota) {
+        return usuarioMapper.toDto(usuarioRepository.findUsuarioEntityByMascota(idMascota));
     }
 }

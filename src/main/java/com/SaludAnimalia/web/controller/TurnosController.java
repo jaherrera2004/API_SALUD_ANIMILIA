@@ -22,4 +22,10 @@ public class TurnosController {
     public List<TurnoDto> obtenerTurnosPorDia(@RequestParam LocalDate fecha) {
         return turnoIService.obtenerTurnosPorDia(fecha);
     }
+
+    @GetMapping("/{idVeterinario}")
+    @PreAuthorize("hasAuthority('turno:obtener-veterinario')")
+    public List<TurnoDto> obtenerTurnoPorVeterinario(Integer idVeterinario){
+        return null;
+    }
 }

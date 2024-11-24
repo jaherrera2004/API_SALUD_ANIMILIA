@@ -10,4 +10,8 @@ public interface UsuarioIService {
     UsuarioDto obtenerUsuarioPorUsername(String username);
 
     UsuarioDto obtenerUsuarioPorId(Integer id);
+
+    UsuarioDto obtenerUsuarioPorIdCita(Integer idCita);
+
+    UsuarioDto obtenerUsuarioPorIdMascota(Integer idMascota);
 }

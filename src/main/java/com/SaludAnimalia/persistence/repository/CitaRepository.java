@@ -14,6 +14,7 @@ import java.util.List;
 public interface CitaRepository extends JpaRepository<CitaEntity, Integer> {
 
     List<CitaEntity> findCitaEntitiesByMascota_Duenio_Id(Integer idDuenio);
+    List<CitaEntity> findCitaEntitiesByTurno_Veterinario_Id(Integer idVeterinario);
 
     @Modifying
     @Transactional

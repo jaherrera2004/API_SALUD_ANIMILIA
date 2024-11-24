@@ -2,6 +2,7 @@ package com.SaludAnimalia.service.impl;
 
 import com.SaludAnimalia.persistence.repository.CitaRepository;
 import com.SaludAnimalia.service.interfaces.*;
+import com.SaludAnimalia.service.strategy.TIPOS_CORREOS;
 import com.SaludAnimalia.util.mapper.CitaMapper;
 import com.SaludAnimalia.web.advice.exception.HttpGenericException;
 import com.SaludAnimalia.web.dto.*;
@@ -20,8 +21,10 @@ public class CitaServiceImpl implements CitaIService {
     private final MascotaIService mascotaIService;
     private final TurnoIService turnoIService;
     private final TipoCitaIService tipoCitaIService;
+    private final UsuarioIService usuarioIService;
     private final CitaEstadoIService citaEstadoIService;
     private final CitaMapper citaMapper;
+    private  final EmailSenderService emailSenderService;
 
     @Override
     public void agendarCita(CitaRequest request) {
@@ -39,23 +42,45 @@ public class CitaServiceImpl implements CitaIService {
         citaDto.setEstado(citaEstadoDto);
 
         citaRepository.save(citaMapper.toEntity(citaDto));
-        turnoIService.actualizarTurno(request.getIdTurno(),0);
+        turnoIService.actualizarTurno(request.getIdTurno(), 0);
+        emailSenderService.sendEmail(usuarioIService.obtenerUsuarioPorId(mascotaDto.getDuenio().getId()), TIPOS_CORREOS.AGENDA);
     }
 
     @Override
     public List<CitaDto> obtenerCitasPorUsuario(Integer idUsuario) {
-        return citaRepository.findCitaEntitiesByMascota_Duenio_Id(idUsuario)
-                .stream()
-                .map(citaMapper::toDto)
-                .toList();
+
+        UsuarioDto usuarioDto = usuarioIService.obtenerUsuarioPorId(idUsuario);
+
+        switch (usuarioDto.getRol().getRol()) {
+            case "usuario":
+                return citaRepository.findCitaEntitiesByMascota_Duenio_Id(idUsuario)
+                        .stream()
+                        .map(citaMapper::toDto)
+                        .toList();
+
+            case "veterinario":
+                return citaRepository.findCitaEntitiesByTurno_Veterinario_Id(idUsuario)
+                        .stream()
+                        .map(citaMapper::toDto)
+                        .toList();
+
+            default:
+                throw new HttpGenericException(HttpStatus.BAD_REQUEST, "Algo saio mal :(");
+        }
+
     }
 
     @Override
     public void actualizarEstadoCita(Integer idCita, Integer idEstado) {
-        if(!citaRepository.existsById(idCita)){
-            throw new HttpGenericException(HttpStatus.BAD_REQUEST,"Cita inexistente");
+        if (!citaRepository.existsById(idCita)) {
+            throw new HttpGenericException(HttpStatus.BAD_REQUEST, "Cita inexistente");
         }
-        citaRepository.actualizarEstadoCita(idCita,idEstado);
 
+        UsuarioDto usuarioDto = usuarioIService.obtenerUsuarioPorIdCita(idCita);
+        citaRepository.actualizarEstadoCita(idCita, idEstado);
+
+        if(idEstado == 2) { //Cita cancelada
+            emailSenderService.sendEmail(usuarioDto, TIPOS_CORREOS.CANCELACION);
+        }
     }
 }

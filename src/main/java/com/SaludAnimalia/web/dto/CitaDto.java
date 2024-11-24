@@ -1,6 +1,5 @@
 package com.SaludAnimalia.web.dto;
 
-import lombok.Builder;
 import lombok.Data;
 
 @Data

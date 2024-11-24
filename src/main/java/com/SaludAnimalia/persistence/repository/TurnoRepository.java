@@ -20,7 +20,8 @@ public interface TurnoRepository extends JpaRepository<TurnoEntity, Integer> {
             nativeQuery = true)
     List<TurnoEntity> traerTurnosDisponiblesPorDia(@Param("fecha") LocalDate fecha);
 
-    @Modifying  // Esto le indica a Spring que es una operación de modificación.
+
+    @Modifying
     @Transactional
     @Query(value = "UPDATE turnos SET disponible = :estado WHERE id = :id", nativeQuery = true)
     void actualizarTurno(@Param("id") Integer id, @Param("estado") Integer estado);

@@ -26,6 +26,12 @@ public class MascotaController {
         return GenericResponse.ok(true, request.getNombre() + " ha sido agregado a tu lista de mascotas!");
     }
 
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('mascota:obtener-id')")
+    public MascotaDto obtenerMascotaPorId(@PathVariable Integer id){
+        return mascotaIService.obtenerMascotaPorId(id);
+    }
+
     @PreAuthorize("hasAuthority('mascota:obtener-lista-usuario')")
     @GetMapping("/usuario/{idUsuario}")
     public List<MascotaDto> obtenerMascotasPorUsuario(@PathVariable Integer idUsuario) {
