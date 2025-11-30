@@ -232,7 +232,7 @@ Implementado usando el **patrón Strategy** para flexibilidad en los tipos de co
 
 ## 👥 Autor
 
-- **Jose Antonio Herrera** - [jaherrera2004](https://github.com/jaherrera2004)
+- **Juan Andres Herrera** - [jaherrera2004](https://github.com/jaherrera2004)
 
 ## 📄 Licencia
 
